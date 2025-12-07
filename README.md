@@ -1,5 +1,9 @@
 # 🧠 Brain Rot Bot - Automated TikTok/Shorts Video Generator
 
+Start building brain rot with `python3 main.py --interactive`
+
+## 🎯 Features
+
 A fully automated pipeline that generates viral-style TikTok/YouTube Shorts/Instagram Reels from text scripts, complete with:
 - **Text-to-Speech (TTS)** audio with word-accurate timestamps
 - **Synced subtitles** (SRT or karaoke-style ASS)
@@ -7,8 +11,6 @@ A fully automated pipeline that generates viral-style TikTok/YouTube Shorts/Inst
 - **Minecraft/Subway Surfer** background gameplay loops
 - **Multiple meme TTS voices**
 - **Full automation** mode for batch processing
-
-## 🎯 Features
 
 - ✅ **Modular Architecture**: Clean, extensible Python modules
 - ✅ **Multiple TTS Providers**: OpenAI TTS or ElevenLabs
