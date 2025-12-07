@@ -1,0 +1,24 @@
+# Brain Rot Bot - Automated TikTok/Shorts Video Generator
+# Python dependencies
+
+# Core video processing
+moviepy>=1.0.3
+imageio>=2.31.0
+imageio-ffmpeg>=0.4.9
+
+# OpenAI API (for TTS and Whisper)
+openai>=1.12.0
+
+# ElevenLabs API (alternative TTS)
+requests>=2.31.0
+
+# Utilities
+python-dotenv>=1.0.0
+
+# Optional: for better performance
+numpy>=1.24.0
+pillow>=10.0.0
+
+# Optional: for downloading background videos
+yt-dlp>=2023.0.0  # For YouTube downloads (install separately: pip install yt-dlp)
+
