@@ -14,6 +14,11 @@ renders/
 logs/
 *.mp3
 *.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+
 *.wav
 *.srt
 *.ass
