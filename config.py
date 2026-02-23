@@ -50,7 +50,7 @@ class VideoConfig:
     fps: int = 30
     format: str = "mp4"
     codec: str = "libx264"
-    bitrate: str = "5M"
+    bitrate: str = "3M"  # Reduced from 5M for faster encoding and less memory
     background_folder: str = "assets/background_clips"
     auto_loop: bool = True
     crop_mode: str = "center"  # "center", "smart", "fit"
