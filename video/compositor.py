@@ -3,6 +3,7 @@ Video compositor: combines background, audio, and subtitles.
 """
 from pathlib import Path
 from typing import Optional, Dict
+import logging
 from moviepy import (
     VideoFileClip, AudioFileClip, CompositeVideoClip,
     TextClip, ColorClip
@@ -149,23 +150,47 @@ def compose_video(
         # If fade methods not available, skip fades
         pass
     
-    # Write video
-    final_video.write_videofile(
-        str(output_path),
-        fps=config.video.fps,
-        codec=config.video.codec,
-        bitrate=config.video.bitrate,
-        audio_codec='aac',
-        preset='medium',
-        threads=4
-    )
+    # Write video with better error handling and optimizations
+    try:
+        logger.info(f"Writing video to {output_path}...")
+        
+        # Use faster preset and optimize settings for reliability
+        final_video.write_videofile(
+            str(output_path),
+            fps=config.video.fps,
+            codec=config.video.codec,
+            bitrate=config.video.bitrate,
+            audio_codec='aac',
+            preset='fast',  # Changed from 'medium' to 'fast' for reliability
+            threads=2,  # Reduced from 4 to avoid threading issues
+            logger=None,  # Disable verbose logging that can slow things down
+            temp_audiofile=str(output_path.parent / f"temp_{output_path.stem}.m4a"),
+            remove_temp=True,
+            write_logfile=False  # Don't write log file
+        )
+        logger.info("Video write completed successfully")
+    except Exception as e:
+        logger.error(f"Error writing video: {e}", exc_info=True)
+        # Cleanup before raising
+        try:
+            final_video.close()
+            audio.close()
+            background.close()
+            for clip in subtitle_clips:
+                clip.close()
+        except:
+            pass
+        raise
     
     # Cleanup
-    final_video.close()
-    audio.close()
-    background.close()
-    for clip in subtitle_clips:
-        clip.close()
+    try:
+        final_video.close()
+        audio.close()
+        background.close()
+        for clip in subtitle_clips:
+            clip.close()
+    except Exception as e:
+        logger.warning(f"Error during cleanup: {e}")
     
     return output_path
 
